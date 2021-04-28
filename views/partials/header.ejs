@@ -38,8 +38,8 @@
                     <li><a href="/signup" class="smoothScroll">Signup</a></li>
                     <li><a href="/signin" class="smoothScroll">Signin</a></li>
                 <% }else{ %>
-                    <li> <a href="/blog/feed" class="smoothScroll"><%= user.Fname  %> <%= user.Lname %></a> </li>
-                    <li><a href="/blog/logout" class="smoothScroll">Signout</a></li>
+                    <li> <a href="/blog/dashboard" class="smoothScroll"><%= user.fname  %> <%= user.lname %></a> </li>
+                    <li><a href="/logout" class="smoothScroll">Signout</a></li>
                     <li><a href="/blog/create" class="smoothScroll">Create Blog</a></li>
                     <li><a href="/blog/read" class="smoothScroll">Read Blogs</a></li>
                 <% } %> 

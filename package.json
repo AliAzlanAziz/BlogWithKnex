@@ -24,6 +24,7 @@
   "type": "module",
   "homepage": "https://github.com/AliAzlanAziz/BlogWithKnex#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
