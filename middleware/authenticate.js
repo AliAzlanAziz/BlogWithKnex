@@ -12,7 +12,7 @@ function isLoggedOut(req, res, next){
         return next()
     }else{
         req.flash('error', 'Log out to continue')
-        return res.redirect('/dashboard')
+        return res.redirect('/bwk/blog/dashboard')
     }
 }
 

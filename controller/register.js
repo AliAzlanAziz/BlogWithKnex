@@ -6,7 +6,7 @@ export default {
     },
 
     postSignup: passport.authenticate('local-signup', {
-        successRedirect : '/bwk/dashboard',
+        successRedirect : '/bwk/blog/dashboard',
         failureRedirect : 'home',
         failureFlash : true
     }),
@@ -16,7 +16,7 @@ export default {
     },
 
     postSignin: passport.authenticate('local-login', {
-        successRedirect : '/bwk/dashboard',
+        successRedirect : '/bwk/blog/dashboard',
         failureRedirect : 'home',
         failureFlash : true
     }),

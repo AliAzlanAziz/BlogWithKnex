@@ -1,0 +1,60 @@
+<%- include('../partials/header')  %>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    <div class="container">
+        <h3>Add Story</h3>
+        <form action="/bwk/blog/myblogs/update/<%=blog.blogId%>" method="POST" class="col s12">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="row">
+                <div class="input-field">
+                    <input type="text" id="title" name="title" value="<%=blog.title%>">
+                    <label for="title">Title</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <select id="status" name="privacy">
+                        <% if(blog.privacy==='public'){ %> 
+                            <option value="public" selected>Public</option>
+                            <option value="private">Private</option>
+                        <% }else{ %>
+                            <option value="public">Public</option>
+                            <option value="private" selected>Private</option>
+                        <% } %>  
+                    </select>
+                    <label for="status">Status</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <h5>Tell Us Your Story:</h5>
+                    <textarea id="body" name="descript"><%=blog.descript%></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="submit" value="Save" class="btn">
+                <a href="/bwk/blog/Dashboard" class="btn orange">Cancel</a>
+            </div>
+        </form>
+    </div>
+<!-- Compiled and minified JavaScript -->
+<script>
+    
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+<script>
+     M.FormSelect.init(document.querySelector('#status'))
+     ClassicEditor
+     .create( document.querySelector( '#body' ), {
+        toolbar: [ 'heading', 'alignment', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'uploadImage', 'blockQuote', 'undo', 'redo' ]
+     } )
+     .catch( error => {
+          console.error( error );
+     } );
+</script>
+<%- include('../partials/footer')  %>

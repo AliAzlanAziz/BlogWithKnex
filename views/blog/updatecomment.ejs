@@ -1,0 +1,22 @@
+<%- include('../partials/header')  %>
+<link rel="stylesheet" href="/css/comments.css">
+
+<div class="container py-5">
+    <!-- Comments Section -->
+    <div class="be-comment-block">
+        <form action="/bwk/blog/comment/<%=comment.blogId%>/update/<%=comment.cmntId%>" method="POST" class="form-block">
+            <input type="hidden" name="_method" value="PUT">
+            <h2>Update your comment</h2>
+            <div class="row">
+                <div class="col-xs-12">									
+                    <div class="form-group">
+                        <textarea class="form-input" name="cmnt" placeholder="Type your comment here"><%=comment.cmnt%></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary pull-right">Update Comment</button>
+            </div>
+        </form>
+    </div>
+    <!-- Comments Section -->
+</div>
+<%- include('../partials/footer')  %>

@@ -23,3 +23,50 @@ a=b.extend({},c.defaults,a);return a.lazy?this.bind(a.event,function(d){var c=b(
 
 // Initialize all .smoothScroll links
 jQuery(function($){ $.localScroll({filter:'.smoothScroll'}); });
+
+$(document).ready(function(){
+  "use strict";
+  const data_reaction = $("input[name=reactexist]").val()
+  if(data_reaction){
+    $(".like-details").html('Reacted');
+    $(".like-btn-emo").removeClass().addClass('like-btn-emo').addClass('like-btn-'+data_reaction.toLowerCase());
+    $(".like-btn-text").text(data_reaction).removeClass().addClass('like-btn-text').addClass('like-btn-text-'+data_reaction.toLowerCase()).addClass("active");
+  
+    if(data_reaction === "Like"){
+      $(".like-emo").html('<span class="like-btn-like"></span>');
+    }
+    else{
+      $(".like-emo").html('<span class="like-btn-like"></span><span class="like-btn-'+data_reaction.toLowerCase()+'"></span>');
+    }
+  }
+  $(".reaction").on("click",function(){   // like click
+    var data_reaction = $(this).attr("data-reaction");
+    $(".like-details").html();
+    $(".like-btn-emo").removeClass().addClass('like-btn-emo').addClass('like-btn-'+data_reaction.toLowerCase());
+    $(".like-btn-text").text(data_reaction).removeClass().addClass('like-btn-text').addClass('like-btn-text-'+data_reaction.toLowerCase()).addClass("active");
+
+    if(data_reaction === "Like"){
+      $(".like-emo").html('<span class="like-btn-like"></span>');
+    }
+    else{
+      $(".like-emo").html('<span class="like-btn-like"></span><span class="like-btn-'+data_reaction.toLowerCase()+'"></span>');
+    }
+  });
+
+  $(".like-btn-text").on("click",function(){ // undo like click
+	  if($(this).hasClass("active")){
+		  $(".like-btn-text").text("Like").removeClass().addClass('like-btn-text');
+		  $(".like-btn-emo").removeClass().addClass('like-btn-emo').addClass("like-btn-default");
+		  $(".like-emo").html('<span class="like-btn-like"></span>');
+		  $(".like-details").html("Dhaval Rana and 1k others");
+	  }	  
+    $( "#reactform" ).append('<input type="hidden" name="react">').submit();
+
+  });
+  $( ".reaction-love" ).click(function() {
+    $( "#reactform" ).append('<input type="hidden" name="react" value="love">').submit();
+  });
+  $( ".reaction-angry" ).click(function() {
+    $( "#reactform" ).append('<input type="hidden" name="react" value="angry">').submit();
+  }); 
+});

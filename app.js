@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import path from 'path'
 import flash from 'connect-flash'
 import passport from 'passport'
+import methodOverride from 'method-override'
 import { route as basicRoute } from './route/basic.js'
 import { route as authRoute } from './route/register.js'
 import { route as blogRoute } from './route/blog.js'
@@ -58,6 +59,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//custom methodOverride
+app.use(
+    methodOverride(function (req, res) {
+        if(req.body && typeof req.body === 'object' && '_method' in req.body){
+            // look in urlencoded POST bodies and delete it
+            let method = req.body._method
+            delete req.body._method
+            return method
+        }
+    })
+)
+
 //declaring variables
 const PORT = process.env.PORT || 6000
 const NODE_ENV = process.env.NODE_ENV
@@ -82,7 +95,7 @@ app.use(function(req,res,next){
 //setting routes
 app.use('/', basicRoute)
 app.use('/', authRoute)
-app.use('/bwk/', blogRoute)
+app.use('/bwk/blog', blogRoute)
 
 //start the server
 app.listen(PORT, ()=>{

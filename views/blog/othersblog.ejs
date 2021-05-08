@@ -1,0 +1,66 @@
+<%- include('../partials/header')  %>
+<link rel="stylesheet" href="/css/blog.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+<div class="container py-5">
+
+    <!-- Hero -->
+    <h1 class="display-4 mb-3"><%=blog.title%></h1>
+    <hr class="border-1 border-black mb-5 ml-0 text-left w-15" role="presentation">
+
+    <figure>
+        <img src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2126&q=80" class="img-fluid mb-2" alt="Yellow and green leafed trees">
+    </figure>
+
+    <!-- /blog-post -->
+    <div class="blog-post">
+        <h2 class="blog-post-title"><%=blog.title%></h2>
+        <% var month= ["January","February","March","April","May","June","July", "August","September","October","November","December"] %> 
+        <p class="blog-post-meta"><%=month[parseInt(blog.blogtime.toISOString().split('T')[0].split('-')[1])-1]%>  <%=blog.blogtime.toISOString().split('T')[0].split('-')[2]%>, <%=blog.blogtime.toISOString().split('T')[0].split('-')[0]%> by <a href="/bwk/blog/feed/<%=blog.blogId%>"><%=blog.fname%> <%=blog.lname%></a></p>
+
+        <%-blog.descript%> 
+    </div>
+    <!-- /.blog-post -->
+    <!-- Comments Section -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="be-comment-block">
+        <% if(comments.length){ %> 
+            <h1 class="comments-title">Comments (<%=comments.length%>)</h1>
+            <% comments.forEach(comment => { %> 
+                <div class="be-comment">
+                    <div class="be-img-comment">	
+                        <a href="#">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment">
+                        </a>
+                    </div>
+                    <div class="be-comment-content">
+                        <span class="be-comment-name">
+                            <a href="#"><%=comment.fname%> <%=comment.lname%></a>
+                        </span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            <% var month= ["Jan","Feb","March","April","May","June","July", "Aug","Sep","Oct","Nov","Dec"] %> 
+                            <%=month[parseInt(comment.cmnttime.toISOString().split('T')[0].split('-')[1])-1]%>  <%=comment.cmnttime.toISOString().split('T')[0].split('-')[2]%>, <%=comment.cmnttime.toISOString().split('T')[0].split('-')[0]%> at <%=comment.cmnttime.toLocaleString('en-US', { hour: 'numeric', minute:'numeric', hour12: true })%> 
+                            <% if(comment.userId===user.userId){ %> 
+                                <a href="/bwk/blog/comment/<%=blog.blogId%>/delete/<%=comment.cmntId%>" class="btn btn-danger btn-group-xs">Delete</a>
+                                <a href="/bwk/blog/comment/<%=blog.blogId%>/update/<%=comment.cmntId%>" class="btn btn-info btn-group-xs">Update</a>
+                            <% } %>
+                        </span> 
+                        <p class="be-comment-text"><%=comment.cmnt%></p>
+                    </div>
+                </div>
+            <% }) %> 
+        <% } %> 
+        <form action="/bwk/blog/comment/<%=blog.blogId%>" method="POST" class="form-block">
+            <div class="row">
+                <div class="col-xs-12">									
+                    <div class="form-group">
+                        <textarea class="form-input" name="cmnt" placeholder="Type your comment here"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary pull-right">Enter</button>
+            </div>
+        </form>
+    </div>
+    <!-- Comments Section -->
+<%- include('../partials/footer')  %>
